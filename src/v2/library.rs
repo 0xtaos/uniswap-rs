@@ -104,7 +104,8 @@ impl Library {
             .into_iter()
             .zip(sorted)
             .map(|(token, sort)| {
-                let (a, b): (U256, U256) = Tokenizable::from_token(token)?;
+                // TODO: this unwrap is only ok with Multicall v1
+                let (a, b): (U256, U256) = Tokenizable::from_token(token.unwrap())?;
                 Ok(if sort { (b, a) } else { (a, b) })
             })
             .collect()

@@ -1,130 +1,346 @@
 pub use i_swap_router::*;
-#[allow(clippy::too_many_arguments, non_camel_case_types)]
+/// This module was auto-generated with ethers-rs Abigen.
+/// More information at: <https://github.com/gakonst/ethers-rs>
+#[allow(
+    clippy::enum_variant_names,
+    clippy::too_many_arguments,
+    clippy::upper_case_acronyms,
+    clippy::type_complexity,
+    dead_code,
+    non_camel_case_types,
+)]
 pub mod i_swap_router {
-    #![allow(clippy::enum_variant_names)]
-    #![allow(dead_code)]
-    #![allow(clippy::type_complexity)]
-    #![allow(unused_imports)]
-    use ethers_contract::{
-        builders::{ContractCall, Event},
-        Contract, Lazy,
-    };
-    use ethers_core::{
-        abi::{Abi, Detokenize, InvalidOutputType, Token, Tokenizable},
-        types::*,
-    };
-    use ethers_providers::Middleware;
-    #[doc = "ISwapRouter was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
-    use std::sync::Arc;
-    # [rustfmt :: skip] const __ABI : & str = "[{\"inputs\":[{\"components\":[{\"internalType\":\"bytes\",\"name\":\"path\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountIn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountOutMinimum\",\"type\":\"uint256\"}],\"internalType\":\"struct ISwapRouter.ExactInputParams\",\"name\":\"params\",\"type\":\"tuple\"}],\"name\":\"exactInput\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amountOut\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"tokenIn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"tokenOut\",\"type\":\"address\"},{\"internalType\":\"uint24\",\"name\":\"fee\",\"type\":\"uint24\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountIn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountOutMinimum\",\"type\":\"uint256\"},{\"internalType\":\"uint160\",\"name\":\"sqrtPriceLimitX96\",\"type\":\"uint160\"}],\"internalType\":\"struct ISwapRouter.ExactInputSingleParams\",\"name\":\"params\",\"type\":\"tuple\"}],\"name\":\"exactInputSingle\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amountOut\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes\",\"name\":\"path\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountOut\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountInMaximum\",\"type\":\"uint256\"}],\"internalType\":\"struct ISwapRouter.ExactOutputParams\",\"name\":\"params\",\"type\":\"tuple\"}],\"name\":\"exactOutput\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amountIn\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"tokenIn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"tokenOut\",\"type\":\"address\"},{\"internalType\":\"uint24\",\"name\":\"fee\",\"type\":\"uint24\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountOut\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amountInMaximum\",\"type\":\"uint256\"},{\"internalType\":\"uint160\",\"name\":\"sqrtPriceLimitX96\",\"type\":\"uint160\"}],\"internalType\":\"struct ISwapRouter.ExactOutputSingleParams\",\"name\":\"params\",\"type\":\"tuple\"}],\"name\":\"exactOutputSingle\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amountIn\",\"type\":\"uint256\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"int256\",\"name\":\"amount0Delta\",\"type\":\"int256\"},{\"internalType\":\"int256\",\"name\":\"amount1Delta\",\"type\":\"int256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"uniswapV3SwapCallback\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]\n" ;
-    #[doc = r" The parsed JSON-ABI of the contract."]
-    pub static ISWAPROUTER_ABI: ethers_contract::Lazy<ethers_core::abi::Abi> =
-        ethers_contract::Lazy::new(|| {
-            ethers_core::utils::__serde_json::from_str(__ABI).expect("invalid abi")
-        });
-    pub struct ISwapRouter<M>(ethers_contract::Contract<M>);
-    impl<M> Clone for ISwapRouter<M> {
-        fn clone(&self) -> Self {
-            ISwapRouter(self.0.clone())
+    #[allow(deprecated)]
+    fn __abi() -> ::ethers_core::abi::Abi {
+        ::ethers_core::abi::ethabi::Contract {
+            constructor: ::core::option::Option::None,
+            functions: ::core::convert::From::from([
+                (
+                    ::std::borrow::ToOwned::to_owned("exactInput"),
+                    ::std::vec![
+                        ::ethers_core::abi::ethabi::Function {
+                            name: ::std::borrow::ToOwned::to_owned("exactInput"),
+                            inputs: ::std::vec![
+                                ::ethers_core::abi::ethabi::Param {
+                                    name: ::std::borrow::ToOwned::to_owned("params"),
+                                    kind: ::ethers_core::abi::ethabi::ParamType::Tuple(
+                                        ::std::vec![
+                                            ::ethers_core::abi::ethabi::ParamType::Bytes,
+                                            ::ethers_core::abi::ethabi::ParamType::Address,
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                        ],
+                                    ),
+                                    internal_type: ::core::option::Option::Some(
+                                        ::std::borrow::ToOwned::to_owned(
+                                            "struct ISwapRouter.ExactInputParams",
+                                        ),
+                                    ),
+                                },
+                            ],
+                            outputs: ::std::vec![
+                                ::ethers_core::abi::ethabi::Param {
+                                    name: ::std::borrow::ToOwned::to_owned("amountOut"),
+                                    kind: ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                    internal_type: ::core::option::Option::Some(
+                                        ::std::borrow::ToOwned::to_owned("uint256"),
+                                    ),
+                                },
+                            ],
+                            constant: ::core::option::Option::None,
+                            state_mutability: ::ethers_core::abi::ethabi::StateMutability::Payable,
+                        },
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("exactInputSingle"),
+                    ::std::vec![
+                        ::ethers_core::abi::ethabi::Function {
+                            name: ::std::borrow::ToOwned::to_owned("exactInputSingle"),
+                            inputs: ::std::vec![
+                                ::ethers_core::abi::ethabi::Param {
+                                    name: ::std::borrow::ToOwned::to_owned("params"),
+                                    kind: ::ethers_core::abi::ethabi::ParamType::Tuple(
+                                        ::std::vec![
+                                            ::ethers_core::abi::ethabi::ParamType::Address,
+                                            ::ethers_core::abi::ethabi::ParamType::Address,
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(24usize),
+                                            ::ethers_core::abi::ethabi::ParamType::Address,
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(160usize),
+                                        ],
+                                    ),
+                                    internal_type: ::core::option::Option::Some(
+                                        ::std::borrow::ToOwned::to_owned(
+                                            "struct ISwapRouter.ExactInputSingleParams",
+                                        ),
+                                    ),
+                                },
+                            ],
+                            outputs: ::std::vec![
+                                ::ethers_core::abi::ethabi::Param {
+                                    name: ::std::borrow::ToOwned::to_owned("amountOut"),
+                                    kind: ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                    internal_type: ::core::option::Option::Some(
+                                        ::std::borrow::ToOwned::to_owned("uint256"),
+                                    ),
+                                },
+                            ],
+                            constant: ::core::option::Option::None,
+                            state_mutability: ::ethers_core::abi::ethabi::StateMutability::Payable,
+                        },
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("exactOutput"),
+                    ::std::vec![
+                        ::ethers_core::abi::ethabi::Function {
+                            name: ::std::borrow::ToOwned::to_owned("exactOutput"),
+                            inputs: ::std::vec![
+                                ::ethers_core::abi::ethabi::Param {
+                                    name: ::std::borrow::ToOwned::to_owned("params"),
+                                    kind: ::ethers_core::abi::ethabi::ParamType::Tuple(
+                                        ::std::vec![
+                                            ::ethers_core::abi::ethabi::ParamType::Bytes,
+                                            ::ethers_core::abi::ethabi::ParamType::Address,
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                        ],
+                                    ),
+                                    internal_type: ::core::option::Option::Some(
+                                        ::std::borrow::ToOwned::to_owned(
+                                            "struct ISwapRouter.ExactOutputParams",
+                                        ),
+                                    ),
+                                },
+                            ],
+                            outputs: ::std::vec![
+                                ::ethers_core::abi::ethabi::Param {
+                                    name: ::std::borrow::ToOwned::to_owned("amountIn"),
+                                    kind: ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                    internal_type: ::core::option::Option::Some(
+                                        ::std::borrow::ToOwned::to_owned("uint256"),
+                                    ),
+                                },
+                            ],
+                            constant: ::core::option::Option::None,
+                            state_mutability: ::ethers_core::abi::ethabi::StateMutability::Payable,
+                        },
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("exactOutputSingle"),
+                    ::std::vec![
+                        ::ethers_core::abi::ethabi::Function {
+                            name: ::std::borrow::ToOwned::to_owned("exactOutputSingle"),
+                            inputs: ::std::vec![
+                                ::ethers_core::abi::ethabi::Param {
+                                    name: ::std::borrow::ToOwned::to_owned("params"),
+                                    kind: ::ethers_core::abi::ethabi::ParamType::Tuple(
+                                        ::std::vec![
+                                            ::ethers_core::abi::ethabi::ParamType::Address,
+                                            ::ethers_core::abi::ethabi::ParamType::Address,
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(24usize),
+                                            ::ethers_core::abi::ethabi::ParamType::Address,
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                            ::ethers_core::abi::ethabi::ParamType::Uint(160usize),
+                                        ],
+                                    ),
+                                    internal_type: ::core::option::Option::Some(
+                                        ::std::borrow::ToOwned::to_owned(
+                                            "struct ISwapRouter.ExactOutputSingleParams",
+                                        ),
+                                    ),
+                                },
+                            ],
+                            outputs: ::std::vec![
+                                ::ethers_core::abi::ethabi::Param {
+                                    name: ::std::borrow::ToOwned::to_owned("amountIn"),
+                                    kind: ::ethers_core::abi::ethabi::ParamType::Uint(256usize),
+                                    internal_type: ::core::option::Option::Some(
+                                        ::std::borrow::ToOwned::to_owned("uint256"),
+                                    ),
+                                },
+                            ],
+                            constant: ::core::option::Option::None,
+                            state_mutability: ::ethers_core::abi::ethabi::StateMutability::Payable,
+                        },
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("uniswapV3SwapCallback"),
+                    ::std::vec![
+                        ::ethers_core::abi::ethabi::Function {
+                            name: ::std::borrow::ToOwned::to_owned(
+                                "uniswapV3SwapCallback",
+                            ),
+                            inputs: ::std::vec![
+                                ::ethers_core::abi::ethabi::Param {
+                                    name: ::std::borrow::ToOwned::to_owned("amount0Delta"),
+                                    kind: ::ethers_core::abi::ethabi::ParamType::Int(256usize),
+                                    internal_type: ::core::option::Option::Some(
+                                        ::std::borrow::ToOwned::to_owned("int256"),
+                                    ),
+                                },
+                                ::ethers_core::abi::ethabi::Param {
+                                    name: ::std::borrow::ToOwned::to_owned("amount1Delta"),
+                                    kind: ::ethers_core::abi::ethabi::ParamType::Int(256usize),
+                                    internal_type: ::core::option::Option::Some(
+                                        ::std::borrow::ToOwned::to_owned("int256"),
+                                    ),
+                                },
+                                ::ethers_core::abi::ethabi::Param {
+                                    name: ::std::borrow::ToOwned::to_owned("data"),
+                                    kind: ::ethers_core::abi::ethabi::ParamType::Bytes,
+                                    internal_type: ::core::option::Option::Some(
+                                        ::std::borrow::ToOwned::to_owned("bytes"),
+                                    ),
+                                },
+                            ],
+                            outputs: ::std::vec![],
+                            constant: ::core::option::Option::None,
+                            state_mutability: ::ethers_core::abi::ethabi::StateMutability::NonPayable,
+                        },
+                    ],
+                ),
+            ]),
+            events: ::std::collections::BTreeMap::new(),
+            errors: ::std::collections::BTreeMap::new(),
+            receive: false,
+            fallback: false,
         }
     }
-    impl<M> std::ops::Deref for ISwapRouter<M> {
-        type Target = ethers_contract::Contract<M>;
+    ///The parsed JSON ABI of the contract.
+    pub static ISWAPROUTER_ABI: ::ethers_contract::Lazy<::ethers_core::abi::Abi> = ::ethers_contract::Lazy::new(
+        __abi,
+    );
+    pub struct ISwapRouter<M>(::ethers_contract::Contract<M>);
+    impl<M> ::core::clone::Clone for ISwapRouter<M> {
+        fn clone(&self) -> Self {
+            Self(::core::clone::Clone::clone(&self.0))
+        }
+    }
+    impl<M> ::core::ops::Deref for ISwapRouter<M> {
+        type Target = ::ethers_contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
             &self.0
         }
     }
-    impl<M> std::fmt::Debug for ISwapRouter<M> {
-        fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-            f.debug_tuple(stringify!(ISwapRouter)).field(&self.address()).finish()
+    impl<M> ::core::ops::DerefMut for ISwapRouter<M> {
+        fn deref_mut(&mut self) -> &mut Self::Target {
+            &mut self.0
         }
     }
-    impl<M: ethers_providers::Middleware> ISwapRouter<M> {
-        #[doc = r" Creates a new contract instance with the specified `ethers`"]
-        #[doc = r" client at the given `Address`. The contract derefs to a `ethers::Contract`"]
-        #[doc = r" object"]
-        pub fn new<T: Into<ethers_core::types::Address>>(
+    impl<M> ::core::fmt::Debug for ISwapRouter<M> {
+        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+            f.debug_tuple(::core::stringify!(ISwapRouter))
+                .field(&self.address())
+                .finish()
+        }
+    }
+    impl<M: ::ethers_providers::Middleware> ISwapRouter<M> {
+        /// Creates a new contract instance with the specified `ethers` client at
+        /// `address`. The contract derefs to a `ethers::Contract` object.
+        pub fn new<T: Into<::ethers_core::types::Address>>(
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            ethers_contract::Contract::new(address.into(), ISWAPROUTER_ABI.clone(), client).into()
+            Self(
+                ::ethers_contract::Contract::new(
+                    address.into(),
+                    ISWAPROUTER_ABI.clone(),
+                    client,
+                ),
+            )
         }
-        #[doc = "Calls the contract's `exactInput` (0xc04b8d59) function"]
+        ///Calls the contract's `exactInput` (0xc04b8d59) function
         pub fn exact_input(
             &self,
             params: ExactInputParams,
-        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256> {
+        ) -> ::ethers_contract::builders::ContractCall<M, ::ethers_core::types::U256> {
             self.0
                 .method_hash([192, 75, 141, 89], (params,))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `exactInputSingle` (0x414bf389) function"]
+        ///Calls the contract's `exactInputSingle` (0x414bf389) function
         pub fn exact_input_single(
             &self,
             params: ExactInputSingleParams,
-        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256> {
+        ) -> ::ethers_contract::builders::ContractCall<M, ::ethers_core::types::U256> {
             self.0
                 .method_hash([65, 75, 243, 137], (params,))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `exactOutput` (0xf28c0498) function"]
+        ///Calls the contract's `exactOutput` (0xf28c0498) function
         pub fn exact_output(
             &self,
             params: ExactOutputParams,
-        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256> {
+        ) -> ::ethers_contract::builders::ContractCall<M, ::ethers_core::types::U256> {
             self.0
                 .method_hash([242, 140, 4, 152], (params,))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `exactOutputSingle` (0xdb3e2198) function"]
+        ///Calls the contract's `exactOutputSingle` (0xdb3e2198) function
         pub fn exact_output_single(
             &self,
             params: ExactOutputSingleParams,
-        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256> {
+        ) -> ::ethers_contract::builders::ContractCall<M, ::ethers_core::types::U256> {
             self.0
                 .method_hash([219, 62, 33, 152], (params,))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `uniswapV3SwapCallback` (0xfa461e33) function"]
+        ///Calls the contract's `uniswapV3SwapCallback` (0xfa461e33) function
         pub fn uniswap_v3_swap_callback(
             &self,
-            amount_0_delta: I256,
-            amount_1_delta: I256,
-            data: ethers_core::types::Bytes,
-        ) -> ethers_contract::builders::ContractCall<M, ()> {
+            amount_0_delta: ::ethers_core::types::I256,
+            amount_1_delta: ::ethers_core::types::I256,
+            data: ::ethers_core::types::Bytes,
+        ) -> ::ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([250, 70, 30, 51], (amount_0_delta, amount_1_delta, data))
                 .expect("method not found (this should never happen)")
         }
     }
-    impl<M: ethers_providers::Middleware> From<ethers_contract::Contract<M>> for ISwapRouter<M> {
-        fn from(contract: ethers_contract::Contract<M>) -> Self {
-            Self(contract)
+    impl<M: ::ethers_providers::Middleware> From<::ethers_contract::Contract<M>>
+    for ISwapRouter<M> {
+        fn from(contract: ::ethers_contract::Contract<M>) -> Self {
+            Self::new(contract.address(), contract.client())
         }
     }
-    #[doc = "Container type for all input parameters for the `exactInput` function with signature `exactInput((bytes,address,uint256,uint256,uint256))` and selector `[192, 75, 141, 89]`"]
+    ///Container type for all input parameters for the `exactInput` function with signature `exactInput((bytes,address,uint256,uint256,uint256))` and selector `0xc04b8d59`
     #[derive(
         Clone,
-        Debug,
-        Eq,
-        PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ::ethers_contract::EthCall,
+        ::ethers_contract::EthDisplay,
         Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
     )]
-    #[ethcall(name = "exactInput", abi = "exactInput((bytes,address,uint256,uint256,uint256))")]
+    #[ethcall(
+        name = "exactInput",
+        abi = "exactInput((bytes,address,uint256,uint256,uint256))"
+    )]
     pub struct ExactInputCall {
         pub params: ExactInputParams,
     }
-    #[doc = "Container type for all input parameters for the `exactInputSingle` function with signature `exactInputSingle((address,address,uint24,address,uint256,uint256,uint256,uint160))` and selector `[65, 75, 243, 137]`"]
+    ///Container type for all input parameters for the `exactInputSingle` function with signature `exactInputSingle((address,address,uint24,address,uint256,uint256,uint256,uint160))` and selector `0x414bf389`
     #[derive(
         Clone,
-        Debug,
-        Eq,
-        PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ::ethers_contract::EthCall,
+        ::ethers_contract::EthDisplay,
         Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
     )]
     #[ethcall(
         name = "exactInputSingle",
@@ -133,29 +349,34 @@ pub mod i_swap_router {
     pub struct ExactInputSingleCall {
         pub params: ExactInputSingleParams,
     }
-    #[doc = "Container type for all input parameters for the `exactOutput` function with signature `exactOutput((bytes,address,uint256,uint256,uint256))` and selector `[242, 140, 4, 152]`"]
+    ///Container type for all input parameters for the `exactOutput` function with signature `exactOutput((bytes,address,uint256,uint256,uint256))` and selector `0xf28c0498`
     #[derive(
         Clone,
-        Debug,
-        Eq,
-        PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ::ethers_contract::EthCall,
+        ::ethers_contract::EthDisplay,
         Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
     )]
-    #[ethcall(name = "exactOutput", abi = "exactOutput((bytes,address,uint256,uint256,uint256))")]
+    #[ethcall(
+        name = "exactOutput",
+        abi = "exactOutput((bytes,address,uint256,uint256,uint256))"
+    )]
     pub struct ExactOutputCall {
         pub params: ExactOutputParams,
     }
-    #[doc = "Container type for all input parameters for the `exactOutputSingle` function with signature `exactOutputSingle((address,address,uint24,address,uint256,uint256,uint256,uint160))` and selector `[219, 62, 33, 152]`"]
+    ///Container type for all input parameters for the `exactOutputSingle` function with signature `exactOutputSingle((address,address,uint24,address,uint256,uint256,uint256,uint160))` and selector `0xdb3e2198`
     #[derive(
         Clone,
-        Debug,
-        Eq,
-        PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ::ethers_contract::EthCall,
+        ::ethers_contract::EthDisplay,
         Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
     )]
     #[ethcall(
         name = "exactOutputSingle",
@@ -164,23 +385,28 @@ pub mod i_swap_router {
     pub struct ExactOutputSingleCall {
         pub params: ExactOutputSingleParams,
     }
-    #[doc = "Container type for all input parameters for the `uniswapV3SwapCallback` function with signature `uniswapV3SwapCallback(int256,int256,bytes)` and selector `[250, 70, 30, 51]`"]
+    ///Container type for all input parameters for the `uniswapV3SwapCallback` function with signature `uniswapV3SwapCallback(int256,int256,bytes)` and selector `0xfa461e33`
     #[derive(
         Clone,
-        Debug,
-        Eq,
-        PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ::ethers_contract::EthCall,
+        ::ethers_contract::EthDisplay,
         Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
     )]
-    #[ethcall(name = "uniswapV3SwapCallback", abi = "uniswapV3SwapCallback(int256,int256,bytes)")]
+    #[ethcall(
+        name = "uniswapV3SwapCallback",
+        abi = "uniswapV3SwapCallback(int256,int256,bytes)"
+    )]
     pub struct UniswapV3SwapCallbackCall {
-        pub amount_0_delta: I256,
-        pub amount_1_delta: I256,
-        pub data: ethers_core::types::Bytes,
+        pub amount_0_delta: ::ethers_core::types::I256,
+        pub amount_1_delta: ::ethers_core::types::I256,
+        pub data: ::ethers_core::types::Bytes,
     }
-    #[derive(Debug, Clone, PartialEq, Eq, ethers_contract :: EthAbiType)]
+    ///Container type for all of the contract's call
+    #[derive(Clone, ::ethers_contract::EthAbiType, Debug, PartialEq, Eq, Hash)]
     pub enum ISwapRouterCalls {
         ExactInput(ExactInputCall),
         ExactInputSingle(ExactInputSingleCall),
@@ -188,209 +414,230 @@ pub mod i_swap_router {
         ExactOutputSingle(ExactOutputSingleCall),
         UniswapV3SwapCallback(UniswapV3SwapCallbackCall),
     }
-    impl ethers_core::abi::AbiDecode for ISwapRouterCalls {
+    impl ::ethers_core::abi::AbiDecode for ISwapRouterCalls {
         fn decode(
             data: impl AsRef<[u8]>,
-        ) -> ::std::result::Result<Self, ethers_core::abi::AbiError> {
-            if let Ok(decoded) =
-                <ExactInputCall as ethers_core::abi::AbiDecode>::decode(data.as_ref())
-            {
-                return Ok(ISwapRouterCalls::ExactInput(decoded));
+        ) -> ::core::result::Result<Self, ::ethers_core::abi::AbiError> {
+            let data = data.as_ref();
+            if let Ok(decoded) = <ExactInputCall as ::ethers_core::abi::AbiDecode>::decode(
+                data,
+            ) {
+                return Ok(Self::ExactInput(decoded));
             }
-            if let Ok(decoded) =
-                <ExactInputSingleCall as ethers_core::abi::AbiDecode>::decode(data.as_ref())
-            {
-                return Ok(ISwapRouterCalls::ExactInputSingle(decoded));
+            if let Ok(decoded) = <ExactInputSingleCall as ::ethers_core::abi::AbiDecode>::decode(
+                data,
+            ) {
+                return Ok(Self::ExactInputSingle(decoded));
             }
-            if let Ok(decoded) =
-                <ExactOutputCall as ethers_core::abi::AbiDecode>::decode(data.as_ref())
-            {
-                return Ok(ISwapRouterCalls::ExactOutput(decoded));
+            if let Ok(decoded) = <ExactOutputCall as ::ethers_core::abi::AbiDecode>::decode(
+                data,
+            ) {
+                return Ok(Self::ExactOutput(decoded));
             }
-            if let Ok(decoded) =
-                <ExactOutputSingleCall as ethers_core::abi::AbiDecode>::decode(data.as_ref())
-            {
-                return Ok(ISwapRouterCalls::ExactOutputSingle(decoded));
+            if let Ok(decoded) = <ExactOutputSingleCall as ::ethers_core::abi::AbiDecode>::decode(
+                data,
+            ) {
+                return Ok(Self::ExactOutputSingle(decoded));
             }
-            if let Ok(decoded) =
-                <UniswapV3SwapCallbackCall as ethers_core::abi::AbiDecode>::decode(data.as_ref())
-            {
-                return Ok(ISwapRouterCalls::UniswapV3SwapCallback(decoded));
+            if let Ok(decoded) = <UniswapV3SwapCallbackCall as ::ethers_core::abi::AbiDecode>::decode(
+                data,
+            ) {
+                return Ok(Self::UniswapV3SwapCallback(decoded));
             }
-            Err(ethers_core::abi::Error::InvalidData.into())
+            Err(::ethers_core::abi::Error::InvalidData.into())
         }
     }
-    impl ethers_core::abi::AbiEncode for ISwapRouterCalls {
+    impl ::ethers_core::abi::AbiEncode for ISwapRouterCalls {
         fn encode(self) -> Vec<u8> {
             match self {
-                ISwapRouterCalls::ExactInput(element) => element.encode(),
-                ISwapRouterCalls::ExactInputSingle(element) => element.encode(),
-                ISwapRouterCalls::ExactOutput(element) => element.encode(),
-                ISwapRouterCalls::ExactOutputSingle(element) => element.encode(),
-                ISwapRouterCalls::UniswapV3SwapCallback(element) => element.encode(),
+                Self::ExactInput(element) => {
+                    ::ethers_core::abi::AbiEncode::encode(element)
+                }
+                Self::ExactInputSingle(element) => {
+                    ::ethers_core::abi::AbiEncode::encode(element)
+                }
+                Self::ExactOutput(element) => {
+                    ::ethers_core::abi::AbiEncode::encode(element)
+                }
+                Self::ExactOutputSingle(element) => {
+                    ::ethers_core::abi::AbiEncode::encode(element)
+                }
+                Self::UniswapV3SwapCallback(element) => {
+                    ::ethers_core::abi::AbiEncode::encode(element)
+                }
             }
         }
     }
-    impl ::std::fmt::Display for ISwapRouterCalls {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+    impl ::core::fmt::Display for ISwapRouterCalls {
+        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
             match self {
-                ISwapRouterCalls::ExactInput(element) => element.fmt(f),
-                ISwapRouterCalls::ExactInputSingle(element) => element.fmt(f),
-                ISwapRouterCalls::ExactOutput(element) => element.fmt(f),
-                ISwapRouterCalls::ExactOutputSingle(element) => element.fmt(f),
-                ISwapRouterCalls::UniswapV3SwapCallback(element) => element.fmt(f),
+                Self::ExactInput(element) => ::core::fmt::Display::fmt(element, f),
+                Self::ExactInputSingle(element) => ::core::fmt::Display::fmt(element, f),
+                Self::ExactOutput(element) => ::core::fmt::Display::fmt(element, f),
+                Self::ExactOutputSingle(element) => ::core::fmt::Display::fmt(element, f),
+                Self::UniswapV3SwapCallback(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
             }
         }
     }
-    impl ::std::convert::From<ExactInputCall> for ISwapRouterCalls {
-        fn from(var: ExactInputCall) -> Self {
-            ISwapRouterCalls::ExactInput(var)
+    impl ::core::convert::From<ExactInputCall> for ISwapRouterCalls {
+        fn from(value: ExactInputCall) -> Self {
+            Self::ExactInput(value)
         }
     }
-    impl ::std::convert::From<ExactInputSingleCall> for ISwapRouterCalls {
-        fn from(var: ExactInputSingleCall) -> Self {
-            ISwapRouterCalls::ExactInputSingle(var)
+    impl ::core::convert::From<ExactInputSingleCall> for ISwapRouterCalls {
+        fn from(value: ExactInputSingleCall) -> Self {
+            Self::ExactInputSingle(value)
         }
     }
-    impl ::std::convert::From<ExactOutputCall> for ISwapRouterCalls {
-        fn from(var: ExactOutputCall) -> Self {
-            ISwapRouterCalls::ExactOutput(var)
+    impl ::core::convert::From<ExactOutputCall> for ISwapRouterCalls {
+        fn from(value: ExactOutputCall) -> Self {
+            Self::ExactOutput(value)
         }
     }
-    impl ::std::convert::From<ExactOutputSingleCall> for ISwapRouterCalls {
-        fn from(var: ExactOutputSingleCall) -> Self {
-            ISwapRouterCalls::ExactOutputSingle(var)
+    impl ::core::convert::From<ExactOutputSingleCall> for ISwapRouterCalls {
+        fn from(value: ExactOutputSingleCall) -> Self {
+            Self::ExactOutputSingle(value)
         }
     }
-    impl ::std::convert::From<UniswapV3SwapCallbackCall> for ISwapRouterCalls {
-        fn from(var: UniswapV3SwapCallbackCall) -> Self {
-            ISwapRouterCalls::UniswapV3SwapCallback(var)
+    impl ::core::convert::From<UniswapV3SwapCallbackCall> for ISwapRouterCalls {
+        fn from(value: UniswapV3SwapCallbackCall) -> Self {
+            Self::UniswapV3SwapCallback(value)
         }
     }
-    #[doc = "Container type for all return fields from the `exactInput` function with signature `exactInput((bytes,address,uint256,uint256,uint256))` and selector `[192, 75, 141, 89]`"]
+    ///Container type for all return fields from the `exactInput` function with signature `exactInput((bytes,address,uint256,uint256,uint256))` and selector `0xc04b8d59`
     #[derive(
         Clone,
-        Debug,
-        Eq,
-        PartialEq,
-        ethers_contract :: EthAbiType,
-        ethers_contract :: EthAbiCodec,
+        ::ethers_contract::EthAbiType,
+        ::ethers_contract::EthAbiCodec,
         Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
     )]
     pub struct ExactInputReturn {
-        pub amount_out: ethers_core::types::U256,
+        pub amount_out: ::ethers_core::types::U256,
     }
-    #[doc = "Container type for all return fields from the `exactInputSingle` function with signature `exactInputSingle((address,address,uint24,address,uint256,uint256,uint256,uint160))` and selector `[65, 75, 243, 137]`"]
+    ///Container type for all return fields from the `exactInputSingle` function with signature `exactInputSingle((address,address,uint24,address,uint256,uint256,uint256,uint160))` and selector `0x414bf389`
     #[derive(
         Clone,
-        Debug,
-        Eq,
-        PartialEq,
-        ethers_contract :: EthAbiType,
-        ethers_contract :: EthAbiCodec,
+        ::ethers_contract::EthAbiType,
+        ::ethers_contract::EthAbiCodec,
         Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
     )]
     pub struct ExactInputSingleReturn {
-        pub amount_out: ethers_core::types::U256,
+        pub amount_out: ::ethers_core::types::U256,
     }
-    #[doc = "Container type for all return fields from the `exactOutput` function with signature `exactOutput((bytes,address,uint256,uint256,uint256))` and selector `[242, 140, 4, 152]`"]
+    ///Container type for all return fields from the `exactOutput` function with signature `exactOutput((bytes,address,uint256,uint256,uint256))` and selector `0xf28c0498`
     #[derive(
         Clone,
-        Debug,
-        Eq,
-        PartialEq,
-        ethers_contract :: EthAbiType,
-        ethers_contract :: EthAbiCodec,
+        ::ethers_contract::EthAbiType,
+        ::ethers_contract::EthAbiCodec,
         Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
     )]
     pub struct ExactOutputReturn {
-        pub amount_in: ethers_core::types::U256,
+        pub amount_in: ::ethers_core::types::U256,
     }
-    #[doc = "Container type for all return fields from the `exactOutputSingle` function with signature `exactOutputSingle((address,address,uint24,address,uint256,uint256,uint256,uint160))` and selector `[219, 62, 33, 152]`"]
+    ///Container type for all return fields from the `exactOutputSingle` function with signature `exactOutputSingle((address,address,uint24,address,uint256,uint256,uint256,uint160))` and selector `0xdb3e2198`
     #[derive(
         Clone,
-        Debug,
-        Eq,
-        PartialEq,
-        ethers_contract :: EthAbiType,
-        ethers_contract :: EthAbiCodec,
+        ::ethers_contract::EthAbiType,
+        ::ethers_contract::EthAbiCodec,
         Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
     )]
     pub struct ExactOutputSingleReturn {
-        pub amount_in: ethers_core::types::U256,
+        pub amount_in: ::ethers_core::types::U256,
     }
-    #[doc = "`ExactInputParams(bytes,address,uint256,uint256,uint256)`"]
+    ///`ExactInputParams(bytes,address,uint256,uint256,uint256)`
     #[derive(
         Clone,
-        Debug,
+        ::ethers_contract::EthAbiType,
+        ::ethers_contract::EthAbiCodec,
         Default,
-        Eq,
+        Debug,
         PartialEq,
-        ethers_contract :: EthAbiType,
-        ethers_contract :: EthAbiCodec,
+        Eq,
+        Hash
     )]
     pub struct ExactInputParams {
-        pub path: ethers_core::types::Bytes,
-        pub recipient: ethers_core::types::Address,
-        pub deadline: ethers_core::types::U256,
-        pub amount_in: ethers_core::types::U256,
-        pub amount_out_minimum: ethers_core::types::U256,
+        pub path: ::ethers_core::types::Bytes,
+        pub recipient: ::ethers_core::types::Address,
+        pub deadline: ::ethers_core::types::U256,
+        pub amount_in: ::ethers_core::types::U256,
+        pub amount_out_minimum: ::ethers_core::types::U256,
     }
-    #[doc = "`ExactInputSingleParams(address,address,uint24,address,uint256,uint256,uint256,uint160)`"]
+    ///`ExactInputSingleParams(address,address,uint24,address,uint256,uint256,uint256,uint160)`
     #[derive(
         Clone,
-        Debug,
+        ::ethers_contract::EthAbiType,
+        ::ethers_contract::EthAbiCodec,
         Default,
-        Eq,
+        Debug,
         PartialEq,
-        ethers_contract :: EthAbiType,
-        ethers_contract :: EthAbiCodec,
+        Eq,
+        Hash
     )]
     pub struct ExactInputSingleParams {
-        pub token_in: ethers_core::types::Address,
-        pub token_out: ethers_core::types::Address,
+        pub token_in: ::ethers_core::types::Address,
+        pub token_out: ::ethers_core::types::Address,
         pub fee: u32,
-        pub recipient: ethers_core::types::Address,
-        pub deadline: ethers_core::types::U256,
-        pub amount_in: ethers_core::types::U256,
-        pub amount_out_minimum: ethers_core::types::U256,
-        pub sqrt_price_limit_x96: ethers_core::types::U256,
+        pub recipient: ::ethers_core::types::Address,
+        pub deadline: ::ethers_core::types::U256,
+        pub amount_in: ::ethers_core::types::U256,
+        pub amount_out_minimum: ::ethers_core::types::U256,
+        pub sqrt_price_limit_x96: ::ethers_core::types::U256,
     }
-    #[doc = "`ExactOutputParams(bytes,address,uint256,uint256,uint256)`"]
+    ///`ExactOutputParams(bytes,address,uint256,uint256,uint256)`
     #[derive(
         Clone,
-        Debug,
+        ::ethers_contract::EthAbiType,
+        ::ethers_contract::EthAbiCodec,
         Default,
-        Eq,
+        Debug,
         PartialEq,
-        ethers_contract :: EthAbiType,
-        ethers_contract :: EthAbiCodec,
+        Eq,
+        Hash
     )]
     pub struct ExactOutputParams {
-        pub path: ethers_core::types::Bytes,
-        pub recipient: ethers_core::types::Address,
-        pub deadline: ethers_core::types::U256,
-        pub amount_out: ethers_core::types::U256,
-        pub amount_in_maximum: ethers_core::types::U256,
+        pub path: ::ethers_core::types::Bytes,
+        pub recipient: ::ethers_core::types::Address,
+        pub deadline: ::ethers_core::types::U256,
+        pub amount_out: ::ethers_core::types::U256,
+        pub amount_in_maximum: ::ethers_core::types::U256,
     }
-    #[doc = "`ExactOutputSingleParams(address,address,uint24,address,uint256,uint256,uint256,uint160)`"]
+    ///`ExactOutputSingleParams(address,address,uint24,address,uint256,uint256,uint256,uint160)`
     #[derive(
         Clone,
-        Debug,
+        ::ethers_contract::EthAbiType,
+        ::ethers_contract::EthAbiCodec,
         Default,
-        Eq,
+        Debug,
         PartialEq,
-        ethers_contract :: EthAbiType,
-        ethers_contract :: EthAbiCodec,
+        Eq,
+        Hash
     )]
     pub struct ExactOutputSingleParams {
-        pub token_in: ethers_core::types::Address,
-        pub token_out: ethers_core::types::Address,
+        pub token_in: ::ethers_core::types::Address,
+        pub token_out: ::ethers_core::types::Address,
         pub fee: u32,
-        pub recipient: ethers_core::types::Address,
-        pub deadline: ethers_core::types::U256,
-        pub amount_out: ethers_core::types::U256,
-        pub amount_in_maximum: ethers_core::types::U256,
-        pub sqrt_price_limit_x96: ethers_core::types::U256,
+        pub recipient: ::ethers_core::types::Address,
+        pub deadline: ::ethers_core::types::U256,
+        pub amount_out: ::ethers_core::types::U256,
+        pub amount_in_maximum: ::ethers_core::types::U256,
+        pub sqrt_price_limit_x96: ::ethers_core::types::U256,
     }
 }
