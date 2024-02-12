@@ -149,6 +149,8 @@ impl<M: Middleware> Pair<M> {
             }
             Err(e) => return Err(e.into()),
         };
+        // TODO: this is only ok with Multicall v1
+        let result: Vec<Token> = result.into_iter().map(|r| r.unwrap()).collect();
 
         match (sync_tokens, sync_reserves) {
             (true, true) => {

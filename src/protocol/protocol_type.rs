@@ -207,7 +207,7 @@ mod tests {
         let chains = vec![
             /*  UniswapV2   */ mainnet(),
             /*  UniswapV3   */ vec![mainnet(), polygon(), l2(), l2_t()].concat(),
-            /*  Sushiswap   */ vec![vec![Fantom, Moonriver, Moonbeam, XDai], mainnet(), polygon(), bsc(), avax()].concat(),
+            /*  Sushiswap   */ vec![vec![Fantom, Moonriver, Moonbeam, Gnosis], mainnet(), polygon(), bsc(), avax()].concat(),
             /* Pancakeswap  */ bsc(),
             /*  Quickswap   */ polygon(),
             /*  Spookyswap  */ vec![Fantom, FantomTestnet],

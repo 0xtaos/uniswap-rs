@@ -107,7 +107,8 @@ impl<M: Middleware> Erc20<M> {
                 macro_rules! assign_if_ok {
                     ($($var:ident)+) => {$(
                         if let Some(token) = tokens.next() {
-                            if let Ok((_, var)) = <(bool, _)>::from_token(token) {
+                            // TODO: unwrap() is only ok using Multicall v1
+                            if let Ok((_, var)) = <(bool, _)>::from_token(token.unwrap()) {
                                 self.$var = Some(var);
                             }
                         }

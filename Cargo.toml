@@ -13,22 +13,22 @@ keywords = ["dex", "uniswap", "sdk", "ethereum", "eth"]
 exclude = [".github/", "abi/", "examples/", "scripts/", "build.rs"]
 
 [build-dependencies]
-ethers-contract-abigen = { version = "1.0", default-features = false }
+ethers-contract-abigen = { version = "2.0", default-features = false }
 eyre = ">=0"
 walkdir = ">=2"
 
 [dependencies]
-ethers-core = "1.0"
-ethers-contract = "1.0"
-ethers-providers = "1.0"
+ethers-core = "2.0"
+ethers-contract = "2.0"
+ethers-providers = { version = "2.0", features = ["dev-rpc", "ipc"] }
 thiserror = "1.0"
 
 serde = { version = "1.0", optional = true }
 serde_json = { version = "1.0", optional = true }
 
 [dev-dependencies]
-ethers-middleware = "1.0"
-ethers-signers = "1.0"
+ethers-middleware = "2.0"
+ethers-signers = "2.0"
 tokio = { version = "1", features = ["macros"] }
 # eyre = "0.6"
 
