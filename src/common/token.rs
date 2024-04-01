@@ -1,9 +1,6 @@
 use crate::{contracts::bindings::ierc20::IERC20, errors::Result};
 use ethers_contract::{builders::ContractCall, Multicall};
-use ethers_core::{
-    abi::Tokenizable,
-    types::{Address, Chain},
-};
+use ethers_core::types::{Address, Chain, U256};
 use ethers_providers::Middleware;
 use std::{fmt, sync::Arc};
 
@@ -99,27 +96,39 @@ impl<M: Middleware> Erc20<M> {
         let mut multicall = Multicall::new_with_chain_id(self.client(), None, Some(chain))?;
         self.add_metadata(&mut multicall);
 
-        // TODO: results
-        #[allow(clippy::single_match)]
         match multicall.call_raw().await {
             Ok(tokens) => {
                 let mut tokens = tokens.into_iter();
-                macro_rules! assign_if_ok {
-                    ($($var:ident)+) => {$(
-                        if let Some(token) = tokens.next() {
-                            // TODO: unwrap() is only ok using Multicall v1
-                            if let Ok((_, var)) = <(bool, _)>::from_token(token.unwrap()) {
-                                self.$var = Some(var);
-                            }
-                        }
-                    )+};
+                // name, symbol, decimals
+                if let Some(token) = tokens.next() {
+                    let name = token.unwrap().into_string();
+                    self.name = name;
                 }
-                assign_if_ok!(name symbol decimals);
+                if let Some(token) = tokens.next() {
+                    let symbol = token.unwrap().into_string();
+                    self.symbol = symbol;
+                }
+                if let Some(token) = tokens.next() {
+                    let decimals = token.unwrap().into_uint();
+                    self.decimals = convert_u256_to_u8(decimals);
+                }
             }
-            Err(_) => { /* TODO */ }
+            Err(_) => { 
+                /* TODO */
+            }
         }
 
         Ok(self)
+    }
+}
+
+fn convert_u256_to_u8(value: Option<U256>) -> Option<u8> {
+    match value {
+        Some(u256_val) => {
+            // Attempt conversion to u8 using TryFrom (handles potential overflow)
+            u8::try_from(u256_val).ok()
+        }
+        None => None,
     }
 }
 

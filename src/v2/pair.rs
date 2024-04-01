@@ -5,7 +5,7 @@ use ethers_contract::{
 };
 use ethers_core::{
     abi::{Detokenize, Token},
-    types::{Address, Chain, H256},
+    types::{Address, Chain, H256,H160}
 };
 use ethers_providers::Middleware;
 use std::{fmt, sync::Arc};
@@ -149,47 +149,70 @@ impl<M: Middleware> Pair<M> {
             }
             Err(e) => return Err(e.into()),
         };
-        // TODO: this is only ok with Multicall v1
+
         let result: Vec<Token> = result.into_iter().map(|r| r.unwrap()).collect();
 
         match (sync_tokens, sync_reserves) {
             (true, true) => {
-                let tokens = parse_tokens_result(result[0..2].to_vec())?;
-                let reserves = parse_reserves_result(result[2..].to_vec())?;
+                if result.len() == 3{
+                    let t0 = result[0].clone().into_address();
+                    let t1 = result[1].clone().into_address();
+                    let tokens = Some((t0.unwrap(), t1.unwrap()));
 
-                if tokens.is_none() || reserves.is_none() {
+                    let reserve = result[2].clone();
+                    let reserves = match reserve {
+                        Token::Tuple(response) => {
+                            let reserve0 = response[0].clone().into_uint().unwrap().as_u128();
+                            let reserve1 = response[1].clone().into_uint().unwrap().as_u128();
+                            let ts = response[2].clone().into_uint().unwrap().as_u32();
+
+                            let reserves = Some((reserve0, reserve1, ts));
+                            reserves
+                        }
+                        _ => { None }
+                    };
+                    
+                    self.tokens = tokens;
+                    self.reserves = reserves;
+                    self.deployed = true;
+                    
+                }else{
                     self.tokens = None;
                     self.deployed = false;
-                    return Ok(self);
                 }
-
-                self.deployed = true;
-                self.tokens = tokens;
-                self.reserves = reserves;
             }
-            (true, false) => {
-                let tokens = parse_tokens_result(result)?;
-
-                if tokens.is_none() {
+            (true, false) => { // tokens on the pair
+                if result.len() == 2{
+                    let t0 = result[0].clone().into_address();
+                    let t1 = result[1].clone().into_address();
+                    self.deployed = true;
+                    self.tokens = Some((t0.unwrap(), t1.unwrap()));
+                }else{
                     self.tokens = None;
                     self.deployed = false;
-                    return Ok(self);
                 }
-
-                self.deployed = true;
-                self.tokens = tokens;
             }
-            (false, true) => {
-                let reserves = parse_reserves_result(result)?;
+            (false, true) => { //reserves
+                let mut tokens = result.into_iter();
+                if let Some(token) = tokens.next() {
+                    match token {
+                        Token::Tuple(response) => {
+                            let reserve0 = response[0].clone().into_uint().unwrap().as_u128();
+                            let reserve1 = response[1].clone().into_uint().unwrap().as_u128();
+                            let ts = response[2].clone().into_uint().unwrap().as_u32();
+    
+                            self.deployed = true;
+                            self.reserves = Some((reserve0, reserve1, ts));
 
-                if reserves.is_none() {
-                    self.tokens = None;
-                    self.deployed = false;
-                    return Ok(self);
+                            return Ok(self);
+                        }
+                        _ => {}
+                    }
                 }
 
-                self.deployed = true;
-                self.reserves = reserves;
+                self.reserves = None;
+                self.deployed = false;
+                
             }
             (false, false) => {}
         }
@@ -250,6 +273,30 @@ fn parse_tokens_result(tokens: Vec<Token>) -> Result<Option<Tokens>> {
         None => Ok(None),
     }
 }
+
+// fn parse_multicall_tokens(tokens: Vec<Token>) -> Result<Option<(H160, H160)>> {
+//     if tokens.len() != 2{
+//         return Ok(None);
+//     }else{
+//         let t0 = tokens[0].clone().into_address();
+//         let t1 = tokens[1].clone().into_address();
+
+//     }
+
+//     type TokensResult = ((bool, Address), (bool, Address));
+//     let res: Option<TokensResult> = parse_result(tokens)?;
+
+//     match res {
+//         Some(res) => {
+//             if res.0 .0 && res.1 .0 {
+//                 Ok(Some((res.0 .1, res.1 .1)))
+//             } else {
+//                 Ok(None)
+//             }
+//         }
+//         None => Ok(None),
+//     }
+// }
 
 /// Parses a multicall result of Pair::get_reserves(), returning None if the call returned an
 /// error.

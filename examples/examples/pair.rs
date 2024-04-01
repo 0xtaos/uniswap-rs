@@ -1,7 +1,7 @@
 use ethers::{prelude::*, utils::format_units};
 use eyre::ContextCompat;
 use std::sync::Arc;
-use uniswap_rs::{contracts::addresses::address, Dex, ProtocolType};
+use uniswap_rs::{contracts::addresses::address, Dex, Erc20, ProtocolType};
 
 #[tokio::main]
 async fn main() -> eyre::Result<()> {
@@ -15,10 +15,15 @@ async fn main() -> eyre::Result<()> {
     let weth = address("WETH", chain);
     let usdc = address("USDC", chain);
 
+    let mut weth_info = Erc20::new(client.clone(), weth);
+    weth_info.sync(chain).await?;
+    println!("weth_info {:?}", weth_info);
+
     println!("Getting ETH/USDC pair info:");
     let dex = Dex::new_with_chain(client, chain, protocol).unwrap();
     let mut pair = dex.pair_for(weth, usdc);
 
+    // pair.sync(true, false).await?;
     pair.sync(true, true).await?;
 
     let _address = pair.address();

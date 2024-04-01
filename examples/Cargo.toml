@@ -10,6 +10,6 @@ publish = false
 [dependencies]
 uniswap-rs = { path = "../" }
 
-ethers = "1.0"
-tokio = { version = "1", features = ["macros"] }
+ethers = "2.0"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 eyre = "0.6"
